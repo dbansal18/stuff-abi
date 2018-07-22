@@ -1,0 +1,39 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.bg {
+    background-color: #ffd54f;
+    height: 100%; 
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: #fff59d;
+    text-align: center;
+}
+
+img {
+		    width: 20%;
+		    height: auto;
+		    display: block;
+		    margin-left: auto;
+		    margin-right: auto;
+		}
+		img:hover {
+		    -ms-transform: scale(1.5); /* IE 9 */
+		    -webkit-transform: scale(1.5); /* Safari 3-8 */
+		    transform: scale(1.5); 
+		} 
