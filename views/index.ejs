@@ -9,17 +9,28 @@
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
-  <body class="bg">
-    <% include partials/nav.ejs %>
-  	<header>
+  <body class="bg" onload="initPage()">
+    <header>
+    <% if(!user){ %><% include partials/nav.ejs %>
+    <% }else{ %><% include partials/adminnav.ejs %><% } %>
+    </header>
     	<img src="images/logo.jpeg">
-  	</header>	
+  		
     <div class="container">
       <div style="text-align:center">
         <h1>Aggarwal Bonding Industries</h1>
         <p><h2>Welcome to Aggarwal Bonding Industries</h2></p>
       </div>
     </div>
-    <div class="footer">Site Created and hosted by dbansal</div>
+    <div class="footer">Site Created and hosted by dbansal<center><a href="/adminLogin/login"><p id="copyright" style="font-size:20px;font-weight:bold;color:#d1c4e9"></p></a></div>
+    <script>
+
+function initPage() {
+    var date = new Date();
+    var currentdate = date.getFullYear();
+    document.getElementById("copyright").innerHTML = "abi &copy; "+currentdate;
+}
+
+</script>
   </body>
 </html>

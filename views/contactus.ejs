@@ -13,7 +13,8 @@
 	  </style>
   </head>
   <body class="bg">
-  	<% include partials/nav.ejs %>
+  	<% if(!user){ %><% include partials/nav.ejs %>
+    <% }else{ %><% include partials/adminnav.ejs %><% } %>
   	<header>
     	<img src="images/logo.jpeg">
   	</header>
