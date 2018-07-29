@@ -60,7 +60,7 @@ app.use('/users', usersRouter);
 app.use('/contactUs', contactsRouter);
 app.use('/customerCare', customerCareRouter);
 app.use('/adminLogin', adminLoginRouter);
-app.use('/addproduct',(req,res,next)=>{s
+app.use('/addproduct',(req,res,next)=>{
 	if(!req.user){
 		res.redirect('/');
 	}

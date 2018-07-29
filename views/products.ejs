@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+    data = {};
+   
+    function updatePage(page_no){
+        data = {'page': page_no}
+        console.log(data);
+        common(data);
+    }
+
+    function addToPage(data){
+        $( "#xyz" ).remove();
+        $( "#def" ).remove();
+        var initial="";
+         initial+='<div class="row" id="xyz">'
+          initial+= '<div id="abc">'
+                for (var i = 0; i < data.products.length; i++) { 
+                    initial+= '<div class="col-md-4">'
+                    initial+=    '<div class="thumbnail">'
+                    initial+= '<img src="'+ "../../products/" + data.products[i].thumbnail+'">'
+                        initial+= '<div class="caption">'
+                            initial+=    '<h3><a href="./../name/'+ data.products[i]._id +'">'+ data.products[i].productName +'</a></h3>'
+                            initial+=    '<p>'+ data.products[i].productDescription +'</p>'
+                            initial+=    '<p>$'+ data.products[i].productPrice +'</p>'
+                            initial+= '</div>'
+                        initial+= '</div>'
+                    initial+= '</div>'
+                }
+        initial+= '</div></div>'
+        // $("#xyz").append(initial);
+
+        var final = "";
+        if (data.pages > 0) { 
+                final += '<div id="def"><ul class="pagination text-center">';
+                if (data.pageNo == 1) {
+                    final += '<li class="disabled"><a>First</a></li>';
+                } else {
+                    final += '<li onclick="updatePage(this.id)" id="1"><a>First</a></li>';
+                } 
+                var i = (Number(data.pageNo) > 5 ? Number(data.pageNo) - 4 : 1);
+                if (i !== 1) { 
+                    final += '<li class="disabled"><a>...</a></li>';
+                }
+                for (; i <= (Number(data.pageNo) + 4) && i <= data.pages; i++) {
+                        if (i == data.pageNo) { 
+                            final +=  '<li class="active"><a>'+ i +'</a></li>';
+                        } else {
+                            final += '<li onclick="updatePage(this.id)" id="'+ i +'"><a>'+ i +'</a></li>';
+                        }
+                        if (i == Number(data.pageNo) + 4 && i < data.pages) { 
+                            final += '<li class="disabled"><a>...</a></li>';
+                        }
+                    }
+                    if (data.pageNo == data.pages) {
+                        final +=  '<li class="disabled"><a>Last</a></li>';
+                    } else { 
+                        final +=  '<li onclick="updatePage(this.id)" id="'+ data.pages + '"><a>Last</a></li>';
+                    }
+                    final +='</ul>';
+            final += '</div>';
+         }
+
+         $('#mno').append(initial);
+         $('#mno').append(final);
+        console.log(data.pageNo);
+    }
+
+    function common(data) {
+        $.ajax({
+            type: 'GET',
+            url : '/products/productlist/data',
+            data: data, 
+            success: (data)=> {
+                // console.log(data);
+                addToPage(data);
+            }
+        });
+
+    }
+
+</script>
+
+</head>
+<body class="bg">
+    <% if(!user){ %>
+    <% include partials/nav.ejs %>
+    <% }else{ %>
+    <% include partials/adminnav.ejs %>
+    <% } %>
+    <div class="container" id="mno">
+        <div class="row" id='xyz'>
+            <div id='abc'>
+                <% for (var i = 0; i < products.length; i++) { %>
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <img src='<%= "../../products/" + products[i].thumbnail%>'>
+                            <div class="caption">
+                                <h3><a href='./../name/<%= products[i]._id %>'><%= products[i].productName %></a></h3>
+                                <p><%= products[i].productDescription %></p>
+                                <p>$<%= products[i].productPrice %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <div id='def'>
+            <% if (pages > 0) { %>
+                <ul class="pagination text-center">
+                    <% if (current == 1) { %>
+                        <li class="disabled"><a>First</a></li>
+                    <% } else { %>
+                        <li onclick="updatePage(this.id)" id="1"><a>First</a></li>
+                    <% } %>
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li onclick="updatePage(this.id)" id="<%= i %>"><a><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (current == pages) { %>
+                        <li class="disabled"><a>Last</a></li>
+                    <% } else { %>
+                        <li onclick="updatePage(this.id)" id="<%= pages %>"><a>Last</a></li>
+                    <% } %>
+                </ul>
+            <% } %>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

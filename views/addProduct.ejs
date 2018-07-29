@@ -1,0 +1,29 @@
+<html>
+   <head>
+      <title>Add New Product</title>
+      <meta charset="utf-8">
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   </head>
+
+   <body class="bg">
+       <% include partials/adminnav.ejs %>
+      <h3>File Upload:</h3>
+      Select a file to upload: <br />
+
+      <main>
+      <form action = "/addproduct" method = "POST" enctype = "multipart/form-data">
+
+         Name: <input type="text" name="productName" required=""><br /><br />
+         Description: <input type="text" name="productDescription"><br /><br />
+         Price: <input type="number" name="productPrice"><br /><br />
+         <input type="file" name="myImage" size="10000" />
+            <br /><br />
+         <input type = "submit" value = "Add"/>
+      </form>
+      </main>
+   </body>
+</html>

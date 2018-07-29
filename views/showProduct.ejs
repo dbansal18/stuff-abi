@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+
+</style>
+<head>
+	<title><%= product.productName %></title>
+</head>
+<body style="background-color: #84ffff">
+<% if(!user) { %>
+<% include partials/nav.ejs %>
+<% }else{ %>
+<% include partials/adminnav.ejs %>
+<% } %>
+<h2 style="text-align:center"><%= product.productName %></h2>
+<div align="center" class="clearfix"><img src='<%= "../../products/" + product.thumbnail%>'></div>
+<div align="center" class="clearfix"><%= product.productDescription %></div>	
+<div align="center" class="clearfix">$<%= product.productPrice %></div>
+<div align="center" class="clearfix" >
+<% if(user) { %>
+  <a href="/edit/click/<%=product._id%>" id="<%= product._id %>" name="button" class="btn btn-primary">Edit  <span class ="glyphicon glyphicon-edit"></span></a><br><br>
+  <a href="/edit/delete/<%=product._id%>" id="<%= product._id %>" name="button" class="btn btn-primary">Delete  <span class ="glyphicon glyphicon-trash"></span></a><br><br>
+<% } %>
+</div>
+    
+</body>
+</html>
