@@ -41,7 +41,7 @@ var usersRouter = require('./routes/users');
 var contactsRouter = require('./routes/contacts');
 var customerCareRouter = require('./routes/customerCare');
 var adminLoginRouter = require('./routes/login');
-var addproductRouter = require('./routes/addProducts');
+var addproductRouter = require('./routes/addproducts');
 var productsRoutes = require('./routes/products-routes');
 var editProductRoutes = require('./routes/editProduct-routes');
 
