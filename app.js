@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport');
-var cookieSession = require('cookie-session');
+//var cookieSession = require('cookie-session');
 var passportSetup = require('./config/passport');
 var db = require('./db');
 var mongoose = require('mongoose');
@@ -14,10 +14,10 @@ var keys = require('./config/keys');
 var app = express();
 
 // set up session cookies
-app.use(cookieSession({
-    maxAge: 60 * 60 * 1000,
-    keys: [keys.session.cookieKey]
-}));
+// app.use(cookieSession({
+//     maxAge: 60 * 60 * 1000,
+//     keys: [keys.session.cookieKey]
+// }));
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
